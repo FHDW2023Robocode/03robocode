@@ -4,7 +4,7 @@ import robocode.HitByBulletEvent;
 import robocode.Robot;
 import robocode.ScannedRobotEvent;
 
-public class FirstRobot extends Robot {
+public class FirstRobot03 extends Robot {
 
     @Override
     public void run() {
