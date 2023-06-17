@@ -44,9 +44,13 @@ public class NetterName extends AdvancedRobot {
 
             setTurnRadarRightRadians(Utils.normalRelativeAngle(radarTurn));
 
-            // calculate firepower based on distance
-            power = Math.min(500 / e.getDistance(), 3);
-            
+            // calculate firepower based on distance and Velocity
+            if (e.getVelocity()<=1) {
+                power = 3;
+            } else {
+                power = Math.min(500 / e.getDistance(), 3);
+            }
+
             // get Enemy Data
 
             // enemySpeed=e.getVelocity();//the velocity of the robot in pixel pro tick
