@@ -1,11 +1,13 @@
 package de.fhdw.robocode;
 
+import java.awt.Color;
+
 import robocode.AdvancedRobot;
 import robocode.HitByBulletEvent;
 
 import robocode.ScannedRobotEvent;
 
-public class AdvancedRobot01 extends AdvancedRobot {
+public class Bob extends AdvancedRobot {
 
     @Override
     public void run() {
@@ -14,20 +16,20 @@ public class AdvancedRobot01 extends AdvancedRobot {
         double angle = 90.0;
 
         while (true) {
-            ahead(radius);
-            turnLeft(angle);
-            turnGunLeft(angle);
-            fireBullet(getEnergy());
+            setAhead(5);
+            setTurnRadarLeft(5);
+            execute();
         }
     }
 
     public void onScannedRobot(ScannedRobotEvent e) {
-        
-        fire(1);
+        //fire(1);
+        setGunColor(Color.BLACK);
+        setTurnGunRight(5);
     }
 
     public void onHitByBullet(HitByBulletEvent e) {
-        turnLeft(90 - e.getBearing());
+        //turnLeft(90 - e.getBearing());
     }
 
 }
