@@ -25,14 +25,14 @@ public class NetterName extends AdvancedRobot {
 
     }
     long fireTime = 0;
-    void doGun() {
+    void doGun(double power) {
         if (fireTime == getTime() && getGunTurnRemaining() == 0) {
             setFire(2);
         }
 
         // ... aiming code ...
 
-        setTurnGunRight(1);
+        setTurnGunRight(power);
         // Don't need to check whether gun turn will complete in single turn because
         // we check that gun is finished turning before calling setFire(...).
         // This is simpler since the precise angle your gun can move in one tick
@@ -49,7 +49,7 @@ public class NetterName extends AdvancedRobot {
         setTurnRadarRightRadians(Utils.normalRelativeAngle(radarTurn));
 
         // ...
-        fire(1);
+        doGun(2);
     }
 
     public void onHitByBullet(HitByBulletEvent e) {
