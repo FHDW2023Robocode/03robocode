@@ -49,7 +49,7 @@ public class NetterName extends AdvancedRobot {
         setTurnRadarRightRadians(Utils.normalRelativeAngle(radarTurn));
 
         // ...
-        doGun(1);
+        doGun(3);
     }
 
     public void onHitByBullet(HitByBulletEvent e) {
