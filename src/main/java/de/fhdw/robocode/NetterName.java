@@ -27,7 +27,7 @@ public class NetterName extends AdvancedRobot {
         setAdjustGunForRobotTurn(true);
         setAdjustRadarForGunTurn(true);
         setAdjustRadarForRobotTurn(true);
-        turnRadarRightRadians(Double.POSITIVE_INFINITY);
+        setTurnRadarRightRadians(Double.POSITIVE_INFINITY);
 
         // Check if the robot is closer than 50px from the wall.
         if (getX() <= 50 || getY() <= 50 || getBattleFieldWidth() - getX() <= 50
@@ -44,7 +44,7 @@ public class NetterName extends AdvancedRobot {
         while (true) {
             scan();
             if (enemyDead) {
-                turnRadarRightRadians(Double.POSITIVE_INFINITY);
+                setTurnRadarRightRadians(Double.POSITIVE_INFINITY);
             }
             /**
             * Check if we are near the wall, and check if we have noticed (inWall boolean) yet.
@@ -63,6 +63,7 @@ public class NetterName extends AdvancedRobot {
                     inWall = true;
                 }
             }
+            
         }
     }
 
@@ -140,12 +141,6 @@ public class NetterName extends AdvancedRobot {
             enemyDead = true;
             enemy = null;
         }
-    }
-
-    public void Movement() {
-        setAhead(enemyDistans);
-        setTurnLeft(enemyDistans);
-        setTurnRight(enemyDistans);
     }
 
     public void onHitRobot(HitRobotEvent e) {
