@@ -32,7 +32,7 @@ public class NetterName extends AdvancedRobot {
 
         // ... aiming code ...
 
-        setTurnGunRight(1);
+        syncGunToRadar();
         // Don't need to check whether gun turn will complete in single turn because
         // we check that gun is finished turning before calling setFire(...).
         // This is simpler since the precise angle your gun can move in one tick
@@ -56,4 +56,10 @@ public class NetterName extends AdvancedRobot {
         turnLeft(90 - e.getBearing());
     }
 
+    public void syncGunToRadar() {
+        if (getRadarHeading() != getGunHeading()) {
+            double angle= getRadarHeading()-getGunHeading();
+            setTurnGunRight(angle);
+        }
+    }
 }
