@@ -3,11 +3,14 @@ package de.fhdw.robocode;
 import robocode.HitByBulletEvent;
 import robocode.Robot;
 import robocode.ScannedRobotEvent;
+import robocode.util.Utils;
 
 public class FirstRobot03 extends Robot {
 
     @Override
     public void run() {
+        setAdjustGunForRobotTurn(true);
+        setAdjustRadarForGunTurn(true);
 
         double radius = 100.0;
         double angle = 90.0;
@@ -20,7 +23,10 @@ public class FirstRobot03 extends Robot {
         }
     }
 
+
+
     public void onScannedRobot(ScannedRobotEvent e) {
+
         fire(1);
     }
 
