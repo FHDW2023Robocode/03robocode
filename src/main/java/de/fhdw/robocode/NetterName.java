@@ -1,28 +1,26 @@
 package de.fhdw.robocode;
 
+import java.util.logging.LogManager;
+
 import robocode.AdvancedRobot;
 import robocode.HitByBulletEvent;
-
+import robocode.Rules;
 import robocode.ScannedRobotEvent;
 import robocode.util.Utils;
 
 public class NetterName extends AdvancedRobot {
-
     @Override
     public void run() {
         setAdjustGunForRobotTurn(true);
         setAdjustRadarForGunTurn(true);
         turnRadarRightRadians(Double.POSITIVE_INFINITY);
         do {
-            // Check for new targets.
-            // Only necessary for Narrow Lock because sometimes our radar is already
-            // pointed at the enemy and our onScannedRobot code doesn't end up telling
-            // it to turn, so the system doesn't automatically call scan() for us
-            // [see the javadocs for scan()].
             scan();
+            if (getScannedRobotEvents().isEmpty()) {
+                
+                turnRadarRightRadians(Double.POSITIVE_INFINITY);
+            }
         } while (true);
-
-
     }
     long fireTime = 0;
     void doGun(double power) {
@@ -31,7 +29,6 @@ public class NetterName extends AdvancedRobot {
         }
 
         // ... aiming code ...
-
         syncGunToRadar();
         // Don't need to check whether gun turn will complete in single turn because
         // we check that gun is finished turning before calling setFire(...).
@@ -39,6 +36,7 @@ public class NetterName extends AdvancedRobot {
         // depends on where your robot is turning.
         fireTime = getTime() + 1;
     }
+
     public void onScannedRobot(ScannedRobotEvent e) {
         double radarTurn =
                 // Absolute bearing to target
@@ -49,6 +47,7 @@ public class NetterName extends AdvancedRobot {
         setTurnRadarRightRadians(Utils.normalRelativeAngle(radarTurn));
 
         // ...
+        
         doGun(3);
     }
 
@@ -58,7 +57,7 @@ public class NetterName extends AdvancedRobot {
 
     public void syncGunToRadar() {
         if (getRadarHeading() != getGunHeading()) {
-            double angle= getRadarHeading()-getGunHeading();
+            double angle = getRadarHeading() - getGunHeading();
             setTurnGunRight(angle);
         }
     }
